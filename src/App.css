@@ -1,0 +1,110 @@
+@import "react-phone-number-input/style.css";
+
+:root {
+  --PhoneInputCountrySelectArrow-color: white;
+  --PhoneInputCountrySelect-marginRight: 4rem;
+  --PhoneInputCountrySelectArrow-color--focus: red;
+  --PhoneInputCountrySelectArrow-width: 4em;
+
+  --PhoneInputCountrySelectArrow-opacity: 0.6;
+  --PhoneInput-color--focus: #ffffff;
+}
+
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  appearance: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.number-input {
+  display: inline-flex;
+  align-items: center;
+}
+
+.number-input button {
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  /* padding: 4px 8px; */
+}
+
+input[type="number"] {
+  /* padding: 4px 8px; */
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.seating {
+  appearance: none;
+  /* background: none; */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+
+  /* border-radius: 50%; */
+  width: 29px;
+  height: 29px;
+  outline: 2px solid white;
+  outline-offset: 4px;
+  transition: 0.12s all linear;
+  border: none;
+}
+
+input[type="radio"].seating:checked {
+  outline: 2px solid white;
+  outline-offset: 5px;
+  border: none;
+  background: white;
+}
+.error {
+  outline: 1px solid red;
+}
+
+.bg-overlay {
+  background-image: url("../public/Logo.svg");
+  background-repeat: no-repeat;
+  width: 30px;
+  background-size: contain;
+  background-repeat: repeat-x;
+  background-origin: left;
+  background-position: 10% 90%;
+}
+
+.active {
+  color: #495e57;
+  background-color: #f4ce14;
+  position: relative;
+  margin-right: 1rem;
+}
+
+.active::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: 17px;
+  left: 7px;
+  background-color: #495e57;
+  color: #f4ce14;
+}
+
+@media screen and (max-width: 1024px) {
+  .active {
+    background-color: #495e57;
+    color: #f4ce14;
+    position: relative;
+    margin-right: 0;
+  }
+  .active::after {
+    color: #495e57;
+    background-color: #f4ce14;
+  }
+}

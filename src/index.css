@@ -1,0 +1,36 @@
+@import "react-phone-number-input/style.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @tailwind react-phone-number-input; */
+
+:root {
+  --bg-color: #495e57;
+
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* custom css */
+/* .full-bleed {
+  box-shadow: 0 0 0 100vmax var(--bg-color);
+  clip-path: inset(0 -100vmax);
+}
+.inverse {
+  /* background: var(--bg-color);
+  color: #efefef; */
+/* }  */
+
+@layer components {
+  .custom-container {
+    @apply mx-auto max-w-[1024px];
+  }
+
+  .PhoneInputInput {
+    @apply text-[1rem] w-full rounded-[0.3rem] p-3 font-semibold text-primary-200 placeholder:opacity-60 focus:border-none focus:outline-none focus:outline-offset-0;
+  }
+  .PhoneInputInput .PhoneInputCountrySelectArrow-color {
+    @apply bg-red-700;
+  }
+}
