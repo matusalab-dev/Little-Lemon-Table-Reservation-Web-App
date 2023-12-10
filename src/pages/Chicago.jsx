@@ -1,5 +1,6 @@
 import person2 from "../assets/Mario and Adrian A.jpg";
 import person1 from "../assets/Mario and Adrian b.jpg";
+import LazyLoadedImage from "../components/LazyLoadedImage";
 import { CustomContainer } from "../layouts/Custom-container";
 
 export const Chicago = () => {
@@ -21,12 +22,12 @@ export const Chicago = () => {
           </p>
         </div>
         <div className=" basis-[50%] flex flex-col  relative z-30  sm:hidden">
-          <img
+          <LazyLoadedImage
             src={person2}
             alt="restaurant-food"
             className="absolute top-[15%] z-50 h-[clamp(14rem,45vh,22rem)] w-[clamp(12rem,28vw,18rem)] rounded-sm object-cover md:right-[10rem]  "
           />
-          <img
+          <LazyLoadedImage
             src={person1}
             alt="restaurant-food"
             className="absolute self-end z-40 h-[clamp(14rem,45vh,22rem)] w-[clamp(12rem,28vw,18rem)]  rounded-sm object-cover "

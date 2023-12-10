@@ -4,6 +4,7 @@ import { GridLayout } from "../layouts/GridLayout";
 import dish1 from "../assets/image-thomas.jpg";
 import dish2 from "../assets/image-emily.jpg";
 import user3 from "../assets/profile-pic-3.jpg";
+import LazyLoadedImage from "../components/LazyLoadedImage";
 
 export const CustomerSay = () => {
   const fullStarIcon = <FaStar fontSize="26px" />;
@@ -80,11 +81,12 @@ export const CustomerSay = () => {
                 </span>
 
                 <div className="flex content-center space-x-6">
-                  <img
-                    className="h-[100px] w-[100px] rounded-full  object-cover"
+                  <LazyLoadedImage
                     src={testimonial.imageUrl}
-                    alt="Title"
+                    alt="testimonial's profile image"
+                    className="h-[100px] w-[100px] rounded-full  object-cover"
                   />
+
                   <p className="self-center text-secondary-400 text-xl font-bold">
                     {`${
                       testimonial.firstName[0].toUpperCase() +

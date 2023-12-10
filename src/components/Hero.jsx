@@ -2,6 +2,7 @@ import { CustomContainer } from "../layouts/Custom-container";
 import { HashLink as Link } from "react-router-hash-link";
 import heroImage from "../assets/restauranfood.jpg";
 import { BgOverlay } from "./BgOverlay";
+import LazyLoadedImage from "./LazyLoadedImage";
 // const hero = require("../assets/restauranfood.jpg");
 
 export const Herosection = () => {
@@ -30,11 +31,10 @@ export const Herosection = () => {
           </Link>
         </div>
         <div className="shrink-0 lg:mr-4">
-          <img
+          <LazyLoadedImage
             src={heroImage}
             alt="restaurant-food"
             className="h-80  w-[22rem] translate-y-10  rounded-lg object-cover md:hidden"
-            loading="lazy"
           />
         </div>
       </CustomContainer>

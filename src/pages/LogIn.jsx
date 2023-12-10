@@ -10,7 +10,7 @@ const tableSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-export const LogIn = () => {
+const LogIn = () => {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -79,3 +79,5 @@ export const LogIn = () => {
     </section>
   );
 };
+
+export default LogIn;
