@@ -40,11 +40,11 @@ export const CommonNavbar = () => {
             Home
           </NavLinkList>
 
-          {/* <NavLinkList
+          <NavLinkList
             title="Reservation"
             to="/reserve"
             className="flex lg:hidden"
-          /> */}
+          />
 
           <NavLinkList
             title="Order Online"
@@ -81,7 +81,7 @@ export const CommonNavbar = () => {
           {/* rendering the Mobile Nav List */}
 
           <NavLinkList title="Home" to="/" className="flex " />
-          {/* <NavLinkList title="Reservation" to="/reserve" className="flex " /> */}
+          <NavLinkList title="Reservation" to="/reserve" className="flex " />
 
           <NavLinkList title="Order Online" to="/order" className="flex " />
           <NavLinkList title="Log In" to="/log-in" className="flex " />
