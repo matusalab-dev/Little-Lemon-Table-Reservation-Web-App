@@ -20,12 +20,10 @@ import { FaUser } from "react-icons/fa";
 // import sendEmail from "../components/email";
 // import sgMail from "../components/email";
 // import "../App.css";
-import axios from "axios";
-import sgMail from "@sendgrid/mail";
+// import axios from "axios";
 import useLocalStorage from "../Hooks/useLocalStorage";
 import { ButtonEl } from "../components/ButtonComponent";
 
-sgMail.setApiKey(import.meta.env.VITE_SENDGRID_API_KEY);
 const msg = {
   to: "mattyabrha45@gmail.com", // Change to your recipient
   from: "mtslabrh97@gmail.com", // Change to your verified sender
