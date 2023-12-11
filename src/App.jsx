@@ -11,6 +11,7 @@ import { CustomerForm } from "./pages/CustomerForm";
 import { LogInLayout } from "./components/LogInLayout";
 import { NotFound } from "./pages/NotFound";
 import "./App.css";
+import "react-phone-number-input/style.css";
 
 const ConfirmedBooking = React.lazy(() =>
   import("./components/ConfirmedBooking")
