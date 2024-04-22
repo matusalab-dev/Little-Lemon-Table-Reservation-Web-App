@@ -1,11 +1,10 @@
-import React, { useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import * as yup from "yup";
 import { FaUser } from "react-icons/fa";
 import { MdRestaurant, MdOutlineCalendarToday, MdAlarm } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { FormikProvider, useFormik } from "formik";
 import { SubmitAPI, FetchAPI } from "../data/FetchAPI";
-import "../App.css";
 import useLocalStorage from "../Hooks/useLocalStorage";
 import { InputComponent } from "./InputComponent";
 import { ButtonEl } from "./ButtonComponent";
@@ -26,120 +25,107 @@ const reducer = (state, action) => {
   }
 };
 
+// form validation using yup
+// check the wright data-type for checkbox
+const tableSchema = yup.object().shape({
+  date: yup.date().required("pick a date"),
+  seating: yup.string().required("pick one of our seatings"),
+  // occasion: yup.string().required("Required"),
+  // resTime: yup.string().required("Required"),
+});
+
+// Radio input seatingOptions
+const seatingOptions = [
+  { key: "Indoor", value: "Indoor" },
+  { key: "Outdoor", value: "Outdoor" },
+];
+
 export const BookingForm = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [appstate, setAppState] = useLocalStorage("appState", "");
+  const [reserve, setReserve] = useLocalStorage("reserved", "");
   const [item, setItem] = useLocalStorage("formState", {});
+  const [previousState, setPreviousState] = useState({});
+
   const navigate = useNavigate();
   // console.log(`default available time:  ${defaultValue}`);
 
-  console.log(state);
-  let firstOption = true;
+  console.log("previousState in booking: ", previousState);
 
   function fetchAvailableTimes(date) {
     const availableSlot = FetchAPI(date);
-    // const getState = getStateFromStorage("formState");
 
-    console.log(availableSlot[0]);
-    const appState = {
+    const reservedTable = {
       time: availableSlot,
       date: date,
     };
 
-    setAppState(appState);
-    // setDefaultValues(availableSlot[0]);
+    setReserve(reservedTable);
+
     dispatch({ type: "UPDATE_TIME", payload: availableSlot });
   }
 
   // date picker triggers the new available times
   // based on the selectedDate
-  function handleDateChange(date) {
+  function handleDate(date) {
     const currentDate = new Date(date);
 
-    console.log(currentDate);
-
     dispatch({ type: "UPDATE_DATE", payload: currentDate });
+
     fetchAvailableTimes(currentDate);
   }
-
-  // form validation using yup
-
-  // check for the right data-type of the yup form field
-  // check the data type for the check-boxes
-  const tableSchema = yup.object().shape({
-    date: yup.date().required("pick a date"),
-
-    seating: yup.string().required("pick one of our seatings"),
-    // occasion: yup.string().required("Required"),
-    // resTime: yup.string().required("Required"),
-  });
-
-  // Radio input seatingOptions
-  const seatingOptions = [
-    { key: "Indoor", value: "Indoor" },
-    { key: "Outdoor", value: "Outdoor" },
-  ];
 
   const formik = useFormik({
     initialValues: {
       date: "",
-      guests: 1,
+      dinners: 1,
       seating: "",
       resTime: "",
-      occasion: "Engagement",
+      occasion: "Birthday",
     },
-    // enableReinitialize: true,
+    enableReinitialize: true,
     validationSchema: tableSchema,
     onSubmit: (values) => {
-      // setPreviousStep(values);
+      console.log("booking-values", values);
       const previousState = {
         date: values.date,
-        guests: values.guests,
+        dinners: values.dinners,
         seating: values.seating,
         resTime: values.resTime,
         occasion: values.occasion,
       };
       // const submitBtnState = false;
+      setPreviousState(values);
 
-      const returnVal = SubmitAPI(values);
-
-      if (returnVal) {
-        console.log(values);
+      const isFilled = SubmitAPI(values);
+      if (isFilled) {
         setItem(values);
-        // console.log(previousStep);
         navigate("CustomerForm", { state: previousState });
         // saveStateToStorage(state, values);
 
-        console.log("submission-status : " + returnVal);
+        console.log("submission-status : " + isFilled);
       }
     },
   });
-  // setPreviousStep(formik.values);
-
-  console.log("resTime: " + formik.values.resTime);
-  // console.log(Date.parse(formik.values.date));
-  // console.log(Date.parse(formik.values.date));
-  // console.log(FormatDate(Date.parse(formik.values.date)));
 
   return (
     <>
       <FormikProvider value={formik}>
         <form
           onSubmit={formik.handleSubmit}
-          className="mr-auto  flex w-[50rem] max-w-[60rem] space-y-4  flex-col  md:ml-auto md:w-[25rem]"
+          className="flex flex-col  w-[50rem]   max-w-[60rem] sm:max-w-[15rem] md:w-[17rem] md:mx-auto lg:w-[45rem]  mr-auto  space-y-4 "
         >
-          <h2 className="mb-10  font-primary  text-6xl text-primary-100">
+          <h2 className="mb-10  font-primary  text-6xl text-primary-100 md:text-5xl">
             Reservations
           </h2>
           <div
             role="group"
             aria-labelledby="my-radio-group"
-            className="flex w-full justify-between md:flex-col"
+            className="flex justify-between md:flex-col"
           >
-            <div className="mb-3 flex w-1/2 md:w-[17.5rem]  items-center justify-start md:mb-10 md:justify-between">
+            <div className="mb-3 flex w-1/2 md:w-[17.5rem] sm:w-full  items-center justify-start md:mb-10 md:justify-between">
               <label
                 htmlFor={seatingOptions[0].value}
-                className="mr-16 font-secondary text-xl font-semibold text-secondary-300 md:mr-0"
+                className="mr-16 font-secondary text-xl sm:text-lg font-semibold text-secondary-300 md:mr-0"
               >
                 {seatingOptions[0].key}
               </label>
@@ -153,17 +139,17 @@ export const BookingForm = () => {
                 checked={formik.values.seating === seatingOptions[0].value}
                 // required
                 // className=" h-8 w-8"
-                className={`form-radio seating ${
+                className={`seating sm:h-12 sm:w-12 ${
                   formik.touched.seating && formik.errors.seating
                     ? "error"
                     : " "
                 } `}
               />
             </div>
-            <div className="mb-3 flex w-1/2 md:w-[17.5rem] items-center justify-start md:mb-10 md:justify-between">
+            <div className="mb-3 flex w-1/2 md:w-[17.5rem] sm:w-full items-center justify-start md:mb-10 md:justify-between">
               <label
                 htmlFor={seatingOptions[1].value}
-                className={` mr-16 font-secondary text-xl font-semibold text-secondary-300 md:mr-0`}
+                className={` mr-16 font-secondary text-xl sm:text-lg font-semibold text-secondary-300 md:mr-0`}
               >
                 {seatingOptions[1].key}
               </label>
@@ -186,9 +172,9 @@ export const BookingForm = () => {
           </div>
 
           <div className=" flex w-full justify-between md:mx-auto md:flex-col md:space-y-5">
-            <div className="relative mb-3 w-1/2">
+            <div className="relative mb-3 w-1/2 sm:w-full ">
               <MdOutlineCalendarToday
-                className={` absolute left-4 top-[4.6rem] text-2xl font-semibold text-primary-200 active:text-primary-200 ${
+                className={` absolute left-4 top-[4.6rem] sm:top-[3.3rem] text-2xl font-semibold text-primary-200 active:text-primary-200 ${
                   formik.touched.date && formik.errors.date
                     ? " text-red-600 focus:text-primary-200 active:text-primary-200 "
                     : ""
@@ -199,52 +185,52 @@ export const BookingForm = () => {
                 type="date"
                 id="date"
                 name="date"
-                className={`text-lg  font-bold mt-2 px-14 py-4 w-[17.5rem] text-primary-200 bg-secondary-300 cursor-pointer`}
+                className={`w-[17.5rem] sm:w-full mt-2 px-14 py-4  text-lg sm:text-sm sm:font-bold font-bold  text-primary-200 bg-secondary-300 cursor-pointer`}
                 touched={formik.touched.date}
                 errors={formik.errors.date}
-                // value={formik.values.date}
+                value={formik.values.date}
                 LabelClass="mr-0"
                 label="Date"
                 onChange={(e) => {
-                  handleDateChange(e.target.value);
+                  handleDate(e.target.value);
                   formik.setFieldValue("date", e.target.value);
                 }}
                 onBlur={formik.handleBlur}
               />
             </div>
 
-            <div className="relative mb-3 w-1/2">
-              <FaUser className="absolute left-4 top-[4.4rem] text-2xl font-semibold text-primary-200" />
+            <div className="relative mb-3 w-1/2 md:w-full">
+              <FaUser className="absolute left-4 top-[4.4rem] sm:top-[3rem] text-2xl font-semibold text-primary-200" />
 
               <InputComponent
                 type="number"
-                className="w-[17.5rem] mt-2 cursor-pointer rounded-[0.19rem]  bg-secondary-300 py-[0.8rem] pl-24 pr-8 font-secondary text-lg font-semibold text-primary-200 outline-8 outline-red-600"
-                name="guests"
-                label="Number of Dinners"
+                className="w-[17.5rem] sm:w-full mt-2 cursor-pointer rounded-[0.19rem]  bg-secondary-300 py-[0.8rem] pl-24 pr-8 font-secondary text-lg sm:text-sm sm:font-semibold font-semibold text-primary-200 outline-8 outline-red-600"
+                name="dinners"
+                label="Number of dinners"
                 LabelClass="mr-0"
-                id="guests"
+                id="dinners"
                 min={1}
                 max={10}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.guests}
+                value={formik.values.dinners}
               />
             </div>
           </div>
           <div className="mt-4 flex w-full justify-between md:flex-col md:space-y-5">
-            <div className="relative mb-3 w-1/2">
+            <div className="relative mb-3 w-1/2 sm:w-full ">
               <label
                 htmlFor="occasion"
-                className="mb-2 block font-semibold text-secondary-300"
+                className="mb-2 sm:mb-1 sm:text-sm block font-semibold text-secondary-300"
               >
                 <MdRestaurant className="absolute bottom-4 left-4 z-30 text-2xl font-semibold  text-primary-200" />
                 Occasion
               </label>
               <select
                 id="occasion"
-                className={` group relative flex w-[17.5rem] cursor-pointer rounded-md  bg-secondary-300 px-6 py-4 text-center font-secondary  text-lg font-semibold text-primary-200`}
+                className={` group relative flex w-[17.5rem] sm:w-full cursor-pointer rounded-md  bg-secondary-300 px-6 py-4 text-center font-secondary  text-lg sm:text-sm sm:font-semibold font-semibold text-primary-200`}
                 onChange={formik.handleChange}
-                value={formik.values.occasion}
+                // value={formik.values.occasion}
                 defaultValue={formik.values.occasion}
               >
                 <option className="  w-[19.5rem] py-16 pl-8">Engagement</option>
@@ -252,48 +238,39 @@ export const BookingForm = () => {
                 <option className="mt-5 w-[19.5rem] p-10">Anniversary</option>
               </select>
             </div>
-            <div className="relative mb-3 w-1/2">
+            <div className="relative mb-3 w-1/2 sm:w-full ">
               <label
                 htmlFor="resTime"
-                className="mb-2 block font-semibold text-secondary-300"
+                className="mb-2 sm:mb-1 sm:text-sm block font-semibold text-secondary-300"
               >
-                <MdAlarm className="absolute left-4 top-12 z-20 text-2xl font-semibold text-primary-200" />
+                <MdAlarm className="absolute left-4 top-12 sm:top-10 z-20 text-2xl font-semibold text-primary-200" />
                 Choose Time
               </label>
 
               <select
                 id="resTime"
                 name="resTime"
-                className="group relative w-[17.5rem] cursor-pointer rounded-md bg-secondary-300 px-6 py-4 text-center font-secondary  text-lg font-semibold text-primary-200"
+                className="group relative w-[17.5rem] sm:w-full cursor-pointer rounded-md bg-secondary-300 px-6 py-4 text-center font-secondary  text-lg sm:text-sm  font-semibold text-primary-200"
                 onChange={formik.handleChange}
                 // onBlur={formik.handleBlur}
-                // value={formik.values.resTime}
+                value={formik.values.resTime}
                 // defaultValue={formik.values.resTime}
               >
                 {state.availableTimes.map(function (time, index) {
-                  if (firstOption) {
-                    return (
-                      <option className="mt-5 w-[300px]  selected " key={index}>
-                        {time}
-                      </option>
-                    );
-                  } else {
-                    firstOption = false;
-                    return (
-                      <option className="mt-5 w-[300px] " key={index}>
-                        {time}
-                      </option>
-                    );
-                  }
+                  return (
+                    <option className="mt-5 w-[300px] " key={index}>
+                      {time}
+                    </option>
+                  );
                 })}
               </select>
             </div>
           </div>
-          <div className="  flex w-full justify-between  md:w-[17.5rem] ">
+          <div className="  flex w-full justify-between sm:w-full  md:w-[17.5rem] ">
             <ButtonEl
               type="submit"
               label="Reserve a Table"
-              className="mt-12 w-[17.5rem]"
+              className="mt-12 w-[17.5rem] sm:text-lg"
               disabled={!formik.isValid || formik.isSubmitting}
             />
           </div>

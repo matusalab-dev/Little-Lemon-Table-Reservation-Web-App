@@ -1,5 +1,5 @@
-import { Outlet, Link } from "react-router-dom";
-import { CommonNavbar } from "./CommonNavBar";
+import { Outlet } from "react-router-dom";
+import { CommonNavbar } from "../layouts/CommonNavBar";
 
 export const BookingLayout = () => {
   return (

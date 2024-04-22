@@ -15,13 +15,13 @@ export const FetchAPI = (selectedDate) => {
     if (random() < 0.5) {
       result.push(i + ":00");
     }
-    if (random() < 0.5) {
+    if (random() > 0.5) {
       result.push(i + ":30");
     }
   }
   return result;
 };
 
-export const SubmitAPI = (formData) => {
+export const SubmitAPI = () => {
   return true;
 };

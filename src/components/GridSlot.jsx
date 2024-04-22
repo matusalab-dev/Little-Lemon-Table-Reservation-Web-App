@@ -1,9 +1,6 @@
-import { FaChevronDown, FaUser, FaUserCircle, FaUserAlt } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 export const GridSlot = ({ NumberOfSlot, colNumber, label, value, icon }) => {
-  console.log(colNumber);
-  console.log(NumberOfSlot);
-
   function slot(NumberOfSlot, colNumber) {
     const SlotList = NumberOfSlot.map((slotNum) => {
       if (colNumber === 2) {

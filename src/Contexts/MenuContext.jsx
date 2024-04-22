@@ -1,5 +1,6 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 import { v4 as uuid } from "uuid";
+
 import dish1 from "../assets/greek salad.jpg";
 import dish2 from "../assets/bruchetta.svg";
 import dish3 from "../assets/lemon dessert.jpg";
@@ -13,7 +14,8 @@ export function MenuProvider({ children }) {
       imageUrl: dish1,
       dishName: "Greek Salad",
       description:
-        "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.",
+        // "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.",
+        "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic.",
       price: "$12.99",
     },
     {

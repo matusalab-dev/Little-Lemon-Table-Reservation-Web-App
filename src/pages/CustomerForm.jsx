@@ -1,15 +1,8 @@
-// import {  } from "react-icons/fa";
-import React from "react";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import "../index.css";
-
-import { FormatDate } from "../utils/FormatDate";
-import { CustomContainer } from "../layouts/Custom-container";
-import { InputComponent } from "../components/InputComponent";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import {
   MdAlarm,
   MdArrowCircleLeft,
@@ -17,22 +10,21 @@ import {
   MdRestaurant,
 } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-// import sendEmail from "../components/email";
-// import sgMail from "../components/email";
-// import "../App.css";
-// import axios from "axios";
 import useLocalStorage from "../Hooks/useLocalStorage";
+import { FormatDate } from "../utils/FormatDate";
+import { BlockContainer } from "../layouts/CustomContainer";
+import { InputComponent } from "../components/InputComponent";
 import { ButtonEl } from "../components/ButtonComponent";
 
-const msg = {
-  to: "mattyabrha45@gmail.com", // Change to your recipient
-  from: "mtslabrh97@gmail.com", // Change to your verified sender
-  subject: "Sending with SendGrid is Fun",
-  text: "and easy to do anywhere, even with Node.js",
-  html: "<strong>and easy to do anywhere, even with Node.js</strong>",
-};
+// const msg = {
+//   to: "mattyabrha45@gmail.com", // Change to your recipient
+//   from: "mtslabrh97@gmail.com", // Change to your verified sender
+//   subject: "Sending with SendGrid is Fun",
+//   text: "and easy to do anywhere, even with Node.js",
+//   html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+// };
 
-const personalSchema = yup.object().shape({
+const personalInfoSchema = yup.object().shape({
   firstName: yup.string().required("first Name is required"),
   lastName: yup.string().required("last Name is required"),
   email: yup.string().email().required("email address is required"),
@@ -46,11 +38,8 @@ export const CustomerForm = () => {
 
   const [month, day] = FormatDate(location.state.date);
 
-  // const d = new Date(location.state.date);
-  // let month = months[d.getMonth()];
-  // let day = d.getDate();
-  console.log(user);
-  console.log("previousStep seating: " + location.state.seating);
+  // console.log(user);
+  console.log("previousStepForm resTime: " + location.state.resTime);
 
   const formik = useFormik({
     initialValues: {
@@ -61,7 +50,7 @@ export const CustomerForm = () => {
       request: "",
     },
     // enableReinitialize: true,
-    validationSchema: personalSchema,
+    validationSchema: personalInfoSchema,
     onSubmit: (values) => {
       console.log(values);
 
@@ -91,14 +80,14 @@ export const CustomerForm = () => {
 
   return (
     <>
-      <section className="md:h-full h-screen  bg-primary-200 ">
-        <CustomContainer>
+      <section className="pb-6 bg-primary-200">
+        <BlockContainer className="w-full">
           <FormikProvider value={formik}>
             <form
               onSubmit={formik.handleSubmit}
-              className=" mr-auto flex w-[50rem] max-w-[60rem]  flex-col  md:ml-auto md:w-[25rem]"
+              className=" mr-auto flex w-[60rem] max-w-[70rem] md:max-w-[40rem]  flex-col  md:ml-auto md:text-sm"
             >
-              <div className="mx-auto flex w-full flex-col space-y-4 py-4 lg:px-6 md:space-y-6 ">
+              <div className=" mx-auto flex w-full flex-col space-y-4 py-4 lg:px-6 md:px-0 md:space-y-6 sm:space-y-8 ">
                 <Link
                   to=".."
                   // relative="path"
@@ -106,7 +95,7 @@ export const CustomerForm = () => {
                 >
                   <MdArrowCircleLeft className="inline text-3xl" />
                 </Link>
-                <div className="flex justify-between gap-10 md:space-y-2 sm:block">
+                <div className="flex justify-between items-end gap-10  sm:block">
                   <div className="  w-1/2 sm:w-full">
                     <InputComponent
                       type="text"
@@ -138,7 +127,7 @@ export const CustomerForm = () => {
                     />
                   </div>
                 </div>
-                <div className="flex gap-10 md:space-y-2 sm:block">
+                <div className="flex items-end gap-10 md:space-y-2 sm:space-y-6 sm:block">
                   <div className="w-1/2 sm:w-full">
                     <InputComponent
                       type="email"
@@ -154,7 +143,7 @@ export const CustomerForm = () => {
                       value={formik.values.email}
                     />
                   </div>
-                  <div className="w-1/2 mt-5 sm:w-full">
+                  <div className="w-1/2 mt-5 sm:w-full ">
                     <label
                       htmlFor="phoneNumber"
                       className="flex font-semibold text-secondary-300 "
@@ -190,33 +179,32 @@ export const CustomerForm = () => {
                   </div>
                 </div>
 
-                <div className="flex w-full gap-10 sm:block sm:space-y-6">
-                  <div className="flex w-1/2 flex-col space-y-5 font-semibold text-secondary-300 sm:w-full">
+                <div className="flex items-start w-full gap-10 sm:block sm:space-y-10 ">
+                  <div className="flex w-1/2 flex-col space-y-5  font-semibold text-secondary-300 sm:w-full">
                     <div className="flex justify-between  ">
                       <h3 className="flex items-center space-x-3 ">
-                        <MdOutlineCalendarToday className="text-2xl" />
+                        <MdOutlineCalendarToday className="text-2xl md:text-xl" />
                         <span>{`${month}, ${day}`}</span>
                       </h3>
 
                       <h3 className="flex items-end space-x-3">
-                        <FaUser className="text-2xl" />
-                        <span> {location.state.guests} Dinners</span>
+                        <FaUser className="text-2xl md:text-xl" />
+                        <span> {location.state.dinners} Dinners</span>
                       </h3>
                     </div>
                     <div className="flex justify-between">
                       <h3 className=" flex space-x-3">
-                        <MdAlarm className="text-2xl" />
+                        <MdAlarm className="text-2xl md:text-xl" />
                         <span>{location.state.resTime}</span>
                       </h3>
                       <h3 className="flex space-x-3">
-                        <MdRestaurant className="text-2xl" />
+                        <MdRestaurant className="text-2xl md:text-xl" />
 
                         <span>{location.state.occasion}</span>
                       </h3>
                     </div>
                     <h3 className="flex self-center text-2xl font-semibold">
-                      <span className="mr-3 ">{location.state.seating}</span>
-                      seating
+                      {location.state.seating} Seating
                     </h3>
                   </div>
                   <div className="w-1/2 sm:w-full">
@@ -230,25 +218,25 @@ export const CustomerForm = () => {
                       className={`text-[1rem] text-primary-200 h-32 w-full rounded-[0.3rem] p-3 font-semibold placeholder:opacity-60`}
                       name="request"
                       id="request"
-                      placeholder="Special Request"
+                      placeholder="can we be seated near the exit as one guest is in a wheelchair. Thank you"
                       onChange={formik.handleChange}
                       value={formik.values.request}
                     />
                   </div>
                 </div>
 
-                <div className=" flex w-full justify-between  md:w-full ">
+                <div className=" flex md:w-1/2 sm:w-full justify-between ">
                   <ButtonEl
                     type="submit"
                     disabled={!formik.isValid || formik.isSubmitting}
                     label="confirm a reservation"
-                    className="mt-6 rounded-[0.3rem] bg-primary-100 px-8 py-3 text-xl font-semibold text-secondary-400 disabled:bg-secondary-200 sm:w-full"
+                    className="mt-6 rounded-[0.3rem] bg-primary-100 px-8 py-3 text-xl font-semibold text-secondary-400 disabled:bg-secondary-200"
                   />
                 </div>
               </div>
             </form>
           </FormikProvider>
-        </CustomContainer>
+        </BlockContainer>
       </section>
     </>
   );

@@ -7,16 +7,20 @@ const ConfirmedBooking = () => {
   const [month, day] = FormatDate(values.state.date);
 
   return (
-    <div className="custom-container flex h-60  flex-col items-center justify-center bg-primary-200 p-8 text-left text-lg font-semibold text-primary-100 sm:w-full sm:items-start sm:p-3 ">
-      <div className="mx-auto flex max-w-[30rem] flex-col items-center space-y-2">
-        <MdCheckCircle className=" text-center text-5xl" />
-        <h2 className="block max-w-[35ch] self-center text-2xl font-bold   md:text-xl">
-          Your reservation has been confirmed!
-        </h2>
-        <p className="md:font-normal">
-          your table is reserved for {`${month.slice(0, 3)}, ${day}.`}
-        </p>
-        <p className="mt-4 text-center">Please check your email.</p>
+    <div className="bg-primary-200">
+      <div className="custom-container flex h-60  flex-col items-center justify-center bg-primary-200 p-8 text-left text-lg font-normal text-primary-100 sm:w-full sm:items-start sm:p-3 ">
+        <div className="mx-auto flex max-w-[30rem] flex-col items-center xs:text-center">
+          <MdCheckCircle className=" text-center text-5xl" />
+          <h1 className="block max-w-[35ch] self-center text-2xl font-bold sm:font-semibold sm:text-lg  md:text-xl">
+            Your reservation has been confirmed!
+          </h1>
+          <p className="mt-2 ">
+            Your table is reserved for {`${month.slice(0, 3)}, ${day}.`}
+          </p>
+          <p className="-mt-1 text-center">
+            Please check your email for more details.
+          </p>
+        </div>
       </div>
     </div>
   );

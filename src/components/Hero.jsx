@@ -1,22 +1,19 @@
-import { CustomContainer } from "../layouts/Custom-container";
+import { BlockContainer } from "../layouts/CustomContainer";
 import { HashLink as Link } from "react-router-hash-link";
 import heroImage from "../assets/restauranfood.jpg";
-import { BgOverlay } from "./BgOverlay";
-import LazyLoadedImage from "./LazyLoadedImage";
-// const hero = require("../assets/restauranfood.jpg");
 
-export const Herosection = () => {
+export const HeroSection = () => {
   return (
     <div className=" relative bg-primary-200 ">
-      <CustomContainer>
-        {/* <BgOverlay top="65%" left="10" /> */}
-
-        <div className="flex   max-w-sm flex-col  justify-start py-8 lg:pl-8">
-          <h1 className="text-left font-primary text-5xl font-semibold text-primary-100">
+      <BlockContainer className="sm:flex-col sm:items-center xs:items-start">
+        <div className="flex  flex-col  max-w-sm py-8">
+          <h1 className=" font-primary text-5xl md:text-4xl font-semibold text-primary-100">
             Little Lemon
           </h1>
-          <h3 className="font-primary text-4xl text-white">Chicago</h3>
-          <p className=" mt-6 font-bold text-secondary-300">
+          <h2 className="font-primary text-4xl md:text-3xl text-white">
+            Chicago
+          </h2>
+          <p className=" mt-6 font-semibold md:max-w-[30ch] sm:max-w-[39ch] xs:max-w-[30ch] leading-tight  text-secondary-300">
             We are a family owned Mediterranean restaurant, focused on
             traditional recipes served with a modern twist.
           </p>
@@ -30,14 +27,14 @@ export const Herosection = () => {
             Reserve a Table
           </Link>
         </div>
-        <div className="shrink-0 lg:mr-4">
-          <LazyLoadedImage
+        <div className="shrink-0">
+          <img
             src={heroImage}
-            alt="restaurant-food"
-            className="h-80  w-[22rem] translate-y-10  rounded-lg object-cover md:hidden"
+            alt="our delicious restaurant-food"
+            className="h-80  w-[22rem] md:h-70 md:w-[18rem] sm:w-[22rem] self-start translate-y-10  rounded-lg object-cover "
           />
         </div>
-      </CustomContainer>
+      </BlockContainer>
     </div>
   );
 };

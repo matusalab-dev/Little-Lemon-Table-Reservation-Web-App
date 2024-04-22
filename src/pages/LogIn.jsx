@@ -1,17 +1,19 @@
-import { InputComponent } from "../components/InputComponent";
-import { LinkEl, ButtonEl } from "../components/ButtonComponent";
-import { CustomContainer } from "../layouts/Custom-container";
-import { Formik, useFormik } from "formik";
-import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+import { InputComponent } from "../components/InputComponent";
+import { ButtonEl } from "../components/ButtonComponent";
+import { BlockContainer } from "../layouts/CustomContainer";
 
 const tableSchema = yup.object().shape({
   email: yup.string().required("Email is required"),
-  password: yup.string().required("Password is required"),
+  password: yup.string().min(8).required("Password is required"),
 });
 
 const LogIn = () => {
   const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,12 +30,11 @@ const LogIn = () => {
 
   return (
     <section className="bg-primary-200">
-      {/* <div className="custom-container flex justify-between"> */}
-      <CustomContainer>
-        <div className="mx-auto   flex  w-full flex-col h-[calc(100vh-5rem)]  ">
+      <BlockContainer>
+        <div className="w-[30rem] max-w-[40rem] md:w-[25rem] md:mx-2 mx-auto sm:w-full  flex flex-col h-[calc(100vh-5rem)]  lg:pb-10 ">
           <form
             onSubmit={formik.handleSubmit}
-            className="mx-auto  mt-16 flex w-[40rem]  max-w-[30rem]  flex-col  md:ml-auto md:w-[25rem]"
+            className="w-full mx-auto mt-16 flex flex-col"
           >
             <InputComponent
               type="email"
@@ -59,8 +60,7 @@ const LogIn = () => {
               label="Password"
               requiredIcon="*"
               placeholder="************"
-              className="placeholder:text-2xl -mt-1
-               font-semibold text-2xl placeholder:font-semibold"
+              className="placeholder:text-2xl -mt-1 font-semibold text-2xl placeholder:font-semibold"
               name="password"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -75,7 +75,7 @@ const LogIn = () => {
             />
           </form>
         </div>
-      </CustomContainer>
+      </BlockContainer>
     </section>
   );
 };

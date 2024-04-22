@@ -1,34 +1,26 @@
-import React from "react";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Booking } from "./pages/Booking";
-import { HomeLayout } from "./components/HomeLayout";
-import { BookingLayout } from "./components/BookingLayout";
-import { OrderDetail } from "./pages/OrderDetail";
-import { OrderLayout } from "./components/OrderLayout";
-// import ConfirmedBooking from "./components/ConfirmedBooking";
 import { CustomerForm } from "./pages/CustomerForm";
-// import { LogIn } from "./pages/LogIn";
-import { LogInLayout } from "./components/LogInLayout";
+import { OrderDetail } from "./pages/OrderDetail";
 import { NotFound } from "./pages/NotFound";
+import { HomeLayout } from "./layouts/HomeLayout";
+import { BookingLayout } from "./layouts/BookingLayout";
+import { OrderLayout } from "./layouts/OrderLayout";
+import { LogInLayout } from "./layouts/LogInLayout";
 import "./App.css";
-import "react-phone-number-input/style.css";
 
-const ConfirmedBooking = React.lazy(() =>
-  import("./components/ConfirmedBooking")
-);
-const LogIn = React.lazy(() => import("./pages/LogIn"));
+const ConfirmedBooking = lazy(() => import("./components/ConfirmedBooking"));
+const LogIn = lazy(() => import("./pages/LogIn"));
 
 const LoadingFallback = () => <div>Loading...</div>;
 
 export default function App() {
   return (
     <>
-      <React.Suspense fallback={<LoadingFallback />}>
+      <Suspense fallback={<LoadingFallback />}>
         <Routes>
-          <Route path="/" element={<HomeLayout />}>
-            <Route path="about" />
-            <Route path="menu" />
-          </Route>
+          <Route path="/" element={<HomeLayout />}></Route>
 
           <Route path="order/:id/:category" element={<OrderLayout />}>
             <Route index element={<OrderDetail />}></Route>
@@ -48,7 +40,7 @@ export default function App() {
 
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </React.Suspense>
+      </Suspense>
     </>
   );
 }

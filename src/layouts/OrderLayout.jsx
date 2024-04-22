@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { Outlet, useParams, useSearchParams } from "react-router-dom";
+import { useContext } from "react";
+import { Outlet, useParams } from "react-router-dom";
 import { MenuContext } from "../Contexts/MenuContext";
-import { CommonNavbar } from "./CommonNavBar";
+import { CommonNavbar } from "../layouts/CommonNavBar";
 
 export const OrderLayout = () => {
   //   const location = useLocation();
@@ -18,12 +18,12 @@ export const OrderLayout = () => {
   return (
     <>
       <CommonNavbar />
-      {/* <div className="bg-secondary-400"> */}
-      <div className="custom-container  bg-primary-200 py-5 px-8 h-[calc(100vh-5rem)] text-secondary-300">
-        <h2 className="mt-3 mb-7 p-0 text-4xl font-bold ">Orders Details </h2>
-        <Outlet context={menu[0]} />
+      <div className="bg-primary-200">
+        <div className="custom-container  bg-primary-200 py-5  sm:px-5 h-min text-secondary-300">
+          <h2 className="mt-3 mb-7 p-0 text-4xl font-bold ">Orders Detail </h2>
+          <Outlet context={menu[0]} />
+        </div>
       </div>
-      {/* </div> */}
     </>
   );
 };
