@@ -154,9 +154,11 @@ export const CustomerForm = () => {
                     <PhoneInput
                       className={`${
                         formik.touched.phoneNumber && formik.errors.phoneNumber
-                          ? "PhoneInputInput error"
+                          ? "input error"
                           : ""
                       }   mt-1`}
+                      list="defaultTels"
+                      id="phoneNumber"
                       name="phoneNumber"
                       placeholder="Phone number"
                       value={formik.values.phoneNumber}

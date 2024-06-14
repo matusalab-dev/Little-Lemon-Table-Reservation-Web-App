@@ -26,7 +26,7 @@ const reducer = (state, action) => {
 };
 
 // form validation using yup
-// check the wright data-type for checkbox
+// check the right data-type for checkbox
 const tableSchema = yup.object().shape({
   date: yup.date().required("pick a date"),
   seating: yup.string().required("pick one of our seatings"),
@@ -79,13 +79,16 @@ export const BookingForm = () => {
       date: "",
       dinners: 1,
       seating: "",
-      resTime: "",
+      resTime: `${new Date().getHours().toLocaleString()}:${new Date()
+        .getMinutes()
+        .toLocaleString()}`,
       occasion: "Birthday",
     },
     enableReinitialize: true,
     validationSchema: tableSchema,
     onSubmit: (values) => {
       console.log("booking-values", values);
+
       const previousState = {
         date: values.date,
         dinners: values.dinners,
@@ -252,8 +255,7 @@ export const BookingForm = () => {
                 name="resTime"
                 className="group relative w-[17.5rem] sm:w-full cursor-pointer rounded-md bg-secondary-300 px-6 py-4 text-center font-secondary  text-lg sm:text-sm  font-semibold text-primary-200"
                 onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
-                value={formik.values.resTime}
+                // value={formik.values.resTime}
                 // defaultValue={formik.values.resTime}
               >
                 {state.availableTimes.map(function (time, index) {
@@ -275,6 +277,10 @@ export const BookingForm = () => {
             />
           </div>
         </form>
+        {console.log(
+          "hours",
+          `${new Date().getHours()}: ${new Date().getMinutes()}`
+        )}
       </FormikProvider>
     </>
   );
