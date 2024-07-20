@@ -1,8 +1,5 @@
-# React + Vite
+### Little-Lemon Table Reservation Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Demo ](https://little-lemon-eosin.vercel.app/)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Little-Lemon Table Reservation Web App is a user-friendly solution designed to streamline the dining experience. Users can effortlessly browse available tables, select preferred time slots, and make reservations with ease.
