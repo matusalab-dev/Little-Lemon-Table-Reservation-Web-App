@@ -13,7 +13,11 @@ import "./App.css";
 const ConfirmedBooking = lazy(() => import("./components/ConfirmedBooking"));
 const LogIn = lazy(() => import("./pages/LogIn"));
 
-const LoadingFallback = () => <div>Loading...</div>;
+const LoadingFallback = () => (
+  <div className="text-center text-lg font-semibold flex items-center justify-center">
+    Loading...
+  </div>
+);
 
 export default function App() {
   return (
