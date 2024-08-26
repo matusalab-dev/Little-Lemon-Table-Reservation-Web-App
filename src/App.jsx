@@ -14,7 +14,7 @@ const ConfirmedBooking = lazy(() => import("./components/ConfirmedBooking"));
 const LogIn = lazy(() => import("./pages/LogIn"));
 
 const LoadingFallback = () => (
-  <div className="text-center text-lg font-semibold flex items-center justify-center">
+  <div className="flex items-center justify-center mt-6 text-lg font-semibold text-center">
     Loading...
   </div>
 );

@@ -1,16 +1,16 @@
 import { BlockContainer } from "../layouts/CustomContainer";
 import { HashLink as Link } from "react-router-hash-link";
-import heroImage from "../assets/restauranfood.jpg";
+import heroImage from "../assets/hero-image-compressed.jpg";
 
 export const HeroSection = () => {
   return (
-    <div className=" relative bg-primary-200 ">
+    <div className="relative bg-primary-200">
       <BlockContainer className="sm:flex-col sm:items-center xs:items-start">
-        <div className="flex  flex-col  max-w-sm py-8">
-          <h1 className=" font-primary text-5xl md:text-4xl font-semibold text-primary-100">
+        <div className="flex flex-col max-w-sm py-8">
+          <h1 className="text-5xl font-semibold font-primary md:text-4xl text-primary-100">
             Little Lemon
           </h1>
-          <h2 className="font-primary text-4xl md:text-3xl text-white">
+          <h2 className="text-4xl text-white font-primary md:text-3xl">
             Chicago
           </h2>
           <p className=" mt-6 font-semibold md:max-w-[30ch] sm:max-w-[39ch] xs:max-w-[30ch] leading-tight  text-secondary-300">

@@ -115,9 +115,9 @@ export const BookingForm = () => {
       <FormikProvider value={formik}>
         <form
           onSubmit={formik.handleSubmit}
-          className="flex flex-col  w-[50rem]   max-w-[60rem] sm:max-w-[15rem] md:w-[17rem] md:mx-auto lg:w-[45rem]  mr-auto  space-y-4 "
+          className="flex flex-col w-[50rem] max-w-[60rem] md:w-[17rem] md:mx-auto lg:w-[45rem] mr-auto space-y-4 "
         >
-          <h2 className="mb-10  font-primary  text-6xl text-primary-100 md:text-5xl">
+          <h2 className="mb-10 text-6xl font-primary text-primary-100 md:text-5xl">
             Reservations
           </h2>
           <div
@@ -125,10 +125,10 @@ export const BookingForm = () => {
             aria-labelledby="my-radio-group"
             className="flex justify-between md:flex-col"
           >
-            <div className="mb-3 flex w-1/2 md:w-[17.5rem] sm:w-full  items-center justify-start md:mb-10 md:justify-between">
+            <div className="mb-3 flex w-1/2 md:w-[17.5rem] sm:w-full  items-center justify-start md:mb-6 md:justify-between">
               <label
                 htmlFor={seatingOptions[0].value}
-                className="mr-16 font-secondary text-xl sm:text-lg font-semibold text-secondary-300 md:mr-0"
+                className="mr-16 text-xl font-semibold font-secondary sm:text-lg text-secondary-300 md:mr-0"
               >
                 {seatingOptions[0].key}
               </label>
@@ -141,7 +141,7 @@ export const BookingForm = () => {
                 onBlur={formik.handleBlur}
                 checked={formik.values.seating === seatingOptions[0].value}
                 // required
-                // className=" h-8 w-8"
+                // className="w-8 h-8 "
                 className={`seating sm:h-12 sm:w-12 ${
                   formik.touched.seating && formik.errors.seating
                     ? "error"
@@ -149,10 +149,10 @@ export const BookingForm = () => {
                 } `}
               />
             </div>
-            <div className="mb-3 flex w-1/2 md:w-[17.5rem] sm:w-full items-center justify-start md:mb-10 md:justify-between">
+            <div className="mb-3 flex w-1/2 md:w-[17.5rem] sm:w-full items-center justify-start md:mb-0 md:justify-between">
               <label
                 htmlFor={seatingOptions[1].value}
-                className={` mr-16 font-secondary text-xl sm:text-lg font-semibold text-secondary-300 md:mr-0`}
+                className="mr-16 text-xl font-semibold font-secondary sm:text-lg text-secondary-300 md:mr-0"
               >
                 {seatingOptions[1].key}
               </label>
@@ -174,10 +174,10 @@ export const BookingForm = () => {
             </div>
           </div>
 
-          <div className=" flex w-full justify-between md:mx-auto md:flex-col md:space-y-5">
-            <div className="relative mb-3 w-1/2 sm:w-full ">
+          <div className="flex justify-between w-full md:mx-auto md:flex-col md:space-y-2">
+            <div className="relative w-1/2 mb-3 md:mb-0 sm:w-full ">
               <MdOutlineCalendarToday
-                className={` absolute left-4 top-[4.6rem] sm:top-[3.3rem] text-2xl font-semibold text-primary-200 active:text-primary-200 ${
+                className={`absolute left-4 top-[4.6rem] sm:top-[3.3rem] text-2xl font-semibold text-primary-200 active:text-primary-200 ${
                   formik.touched.date && formik.errors.date
                     ? " text-red-600 focus:text-primary-200 active:text-primary-200 "
                     : ""
@@ -188,7 +188,7 @@ export const BookingForm = () => {
                 type="date"
                 id="date"
                 name="date"
-                className={`w-[17.5rem] sm:w-full mt-2 px-14 py-4  text-lg sm:text-sm sm:font-bold font-bold  text-primary-200 bg-secondary-300 cursor-pointer`}
+                className="w-[17.5rem] sm:w-full mt-2 px-14 py-4  text-lg sm:text-sm sm:font-bold font-bold  text-primary-200 bg-secondary-300 cursor-pointer"
                 touched={formik.touched.date}
                 errors={formik.errors.date}
                 value={formik.values.date}
@@ -202,7 +202,7 @@ export const BookingForm = () => {
               />
             </div>
 
-            <div className="relative mb-3 w-1/2 md:w-full">
+            <div className="relative w-1/2 mb-3 md:w-full">
               <FaUser className="absolute left-4 top-[4.4rem] sm:top-[3rem] text-2xl font-semibold text-primary-200" />
 
               <InputComponent
@@ -220,13 +220,13 @@ export const BookingForm = () => {
               />
             </div>
           </div>
-          <div className="mt-4 flex w-full justify-between md:flex-col md:space-y-5">
-            <div className="relative mb-3 w-1/2 sm:w-full ">
+          <div className="flex justify-between w-full mt-4 md:flex-col md:space-y-2">
+            <div className="relative w-1/2 mb-3 sm:w-full ">
               <label
                 htmlFor="occasion"
-                className="mb-2 sm:mb-1 sm:text-sm block font-semibold text-secondary-300"
+                className="block mb-2 font-semibold sm:mb-1 sm:text-sm text-secondary-300"
               >
-                <MdRestaurant className="absolute bottom-4 left-4 z-30 text-2xl font-semibold  text-primary-200" />
+                <MdRestaurant className="absolute z-30 text-2xl font-semibold bottom-4 left-4 text-primary-200" />
                 Occasion
               </label>
               <select
@@ -241,12 +241,12 @@ export const BookingForm = () => {
                 <option className="mt-5 w-[19.5rem] p-10">Anniversary</option>
               </select>
             </div>
-            <div className="relative mb-3 w-1/2 sm:w-full ">
+            <div className="relative w-1/2 mb-3 sm:w-full ">
               <label
                 htmlFor="resTime"
-                className="mb-2 sm:mb-1 sm:text-sm block font-semibold text-secondary-300"
+                className="block mb-2 font-semibold sm:mb-1 sm:text-sm text-secondary-300"
               >
-                <MdAlarm className="absolute left-4 top-12 sm:top-10 z-20 text-2xl font-semibold text-primary-200" />
+                <MdAlarm className="absolute z-20 text-2xl font-semibold left-4 top-12 sm:top-10 text-primary-200" />
                 Choose Time
               </label>
 
@@ -255,7 +255,7 @@ export const BookingForm = () => {
                 name="resTime"
                 className="group relative w-[17.5rem] sm:w-full cursor-pointer rounded-md bg-secondary-300 px-6 py-4 text-center font-secondary  text-lg sm:text-sm  font-semibold text-primary-200"
                 onChange={formik.handleChange}
-                // value={formik.values.resTime}
+                value={formik.values.resTime}
                 // defaultValue={formik.values.resTime}
               >
                 {state.availableTimes.map(function (time, index) {
@@ -277,10 +277,6 @@ export const BookingForm = () => {
             />
           </div>
         </form>
-        {console.log(
-          "hours",
-          `${new Date().getHours()}: ${new Date().getMinutes()}`
-        )}
       </FormikProvider>
     </>
   );

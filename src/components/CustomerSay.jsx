@@ -49,27 +49,19 @@ export const CustomerSay = () => {
   ];
 
   return (
-    <section className=" bg-secondary-100 py-24">
-      <h2 className="text-center font-primary text-secondary-400 text-6xl  md:text-5xl font-bold sm:py-1">
-        Testimonials
-      </h2>
-      {/*testimonials grid  */}
-      <GridLayout
-        className={`custom-container xs:grid-cols-[18rem] xs:justify-center md:px-8 sm:px-4 xs:px-0 sm:my-10`}
-      >
-        {testimonials.map((testimonial, index) => {
-          return (
-            <div
-              key={index}
-              className=" cursor-pointer bg-red-200 p-7 sm:px-4 transition-all hover:scale-[1.02] hover:shadow-md"
-            >
-              <div className="flex flex-col  space-y-8 sm:space-y-5 h-min">
-                <span className="flex font-primary text-4xl sm:text-xl sm:font-semibold font-bold text-primary-100">
-                  {testimonial.rating?.map((testimonial, index) => (
-                    <span key={index}>{testimonial}</span>
-                  ))}
-                </span>
-
+    <section className="py-24 bg-secondary-100 lg:px-4">
+      <div className="">
+        <h2 className="text-6xl font-bold text-center font-primary text-secondary-400 md:text-5xl sm:py-1">
+          Testimonials
+        </h2>
+        {/*testimonials grid  */}
+        <GridLayout>
+          {testimonials.map((testimonial, index) => {
+            return (
+              <div
+                className="col-span-2 lg:col-span-3 md:col-span-6 space-y-4 px-8 py-10 bg-red-200 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-md"
+                key={index}
+              >
                 <div className="flex content-center space-x-6 xs:space-x-4">
                   <LazyLoadedImage
                     src={testimonial.imageUrl}
@@ -79,7 +71,7 @@ export const CustomerSay = () => {
                     className="sm:h-[80px] sm:w-[80px] rounded-full  object-cover"
                   />
 
-                  <p className="self-center capitalize text-secondary-400 text-xl sm:text-lg  font-semibold">
+                  <p className="self-center text-xl font-semibold capitalize text-secondary-400 sm:text-lg">
                     {`${
                       testimonial.firstName
                     } ${testimonial.lastName[0].toUpperCase()}.`}
@@ -89,11 +81,17 @@ export const CustomerSay = () => {
                 <p className="xs:text-sm xs:max-w-[33ch] text-base leading-tight text-primary-200 max-w-[45ch] ">
                   {testimonial.review}
                 </p>
+
+                <span className="flex text-4xl font-semibold font-primary sm:text-xs xs:font-semibold text-primary-100">
+                  {testimonial.rating?.map((testimonial, index) => (
+                    <span key={index}>{testimonial}</span>
+                  ))}
+                </span>
               </div>
-            </div>
-          );
-        })}
-      </GridLayout>
+            );
+          })}
+        </GridLayout>
+      </div>
     </section>
   );
 };

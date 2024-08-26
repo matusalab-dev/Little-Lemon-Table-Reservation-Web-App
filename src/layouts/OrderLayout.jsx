@@ -18,12 +18,14 @@ export const OrderLayout = () => {
   return (
     <>
       <CommonNavbar />
-      <div className="bg-primary-200">
-        <div className="custom-container  bg-primary-200 py-5  sm:px-5 h-min text-secondary-300">
-          <h2 className="mt-3 mb-7 p-0 text-4xl font-bold ">Orders Detail </h2>
-          <Outlet context={menu[0]} />
-        </div>
+      {/* <div className="bg-primary-200"> */}
+      <div className="py-5 custom-container sm:px-5 h-min">
+        <h2 className="mt-3 mb-4 text-4xl font-normal font-secondary">
+          Orders-Detail
+        </h2>
+        <Outlet context={menu[0]} />
       </div>
+      {/* </div> */}
     </>
   );
 };

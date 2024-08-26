@@ -1,9 +1,9 @@
 import { createContext } from "react";
 import { v4 as uuid } from "uuid";
 
-import dish1 from "../assets/greek salad.jpg";
-import dish2 from "../assets/bruchetta.svg";
-import dish3 from "../assets/lemon dessert.jpg";
+import dish1 from "../assets/greek-salad-compressed.jpg";
+import dish2 from "../assets/bruchetta-compressed.svg";
+import dish3 from "../assets/lemon-dessert-compressed.jpg";
 
 export const MenuContext = createContext([]);
 
