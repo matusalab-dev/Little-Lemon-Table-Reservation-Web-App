@@ -137,7 +137,7 @@ export const CustomerForm = () => {
                         formik.touched.phoneNumber && formik.errors.phoneNumber
                           ? "phone-input-error phoneInputInput"
                           : ""
-                      }   mt-1`}
+                      }   rounded-xl p-1 mt-1`}
                       list="defaultTels"
                       id="phoneNumber"
                       name="phoneNumber"
@@ -213,7 +213,7 @@ export const CustomerForm = () => {
                     type="submit"
                     disabled={!formik.isValid || formik.isSubmitting}
                     label="confirm a reservation"
-                    className="mt-6 rounded-[0.3rem] bg-primary-100 px-8 py-3 text-xl font-semibold text-secondary-400 disabled:bg-secondary-200"
+                    className="mt-6 rounded-[0.3rem] bg-primary-100 px-8 py-3 text-xl font-semibold text-secondary-400 disabled:bg-secondary-200 capitalize"
                   />
                 </div>
               </div>
