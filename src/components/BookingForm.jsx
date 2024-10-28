@@ -1,9 +1,10 @@
 import { useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { FaUser } from "react-icons/fa";
 import { MdRestaurant, MdOutlineCalendarToday, MdAlarm } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { FormikProvider, useFormik } from "formik";
+
 import { SubmitAPI, FetchAPI } from "../data/FetchAPI";
 import useLocalStorage from "../Hooks/useLocalStorage";
 import { InputComponent } from "./InputComponent";
@@ -49,7 +50,7 @@ export const BookingForm = () => {
   const navigate = useNavigate();
   // console.log(`default available time:  ${defaultValue}`);
 
-  console.log("previousState in booking: ", previousState);
+  console.log("previousState in booking page: ", previousState);
 
   function fetchAvailableTimes(date) {
     const availableSlot = FetchAPI(date);
@@ -97,14 +98,13 @@ export const BookingForm = () => {
         occasion: values.occasion,
       };
       // const submitBtnState = false;
-      setPreviousState(values);
+      setPreviousState(previousState);
 
       const isFilled = SubmitAPI(values);
       if (isFilled) {
         setItem(values);
-        navigate("CustomerForm", { state: previousState });
+        navigate("customer-form", { state: previousState });
         // saveStateToStorage(state, values);
-
         console.log("submission-status : " + isFilled);
       }
     },
@@ -115,7 +115,7 @@ export const BookingForm = () => {
       <FormikProvider value={formik}>
         <form
           onSubmit={formik.handleSubmit}
-          className="flex flex-col w-[50rem] max-w-[60rem] md:w-[17rem] md:mx-auto lg:w-[45rem] mr-auto space-y-4 "
+          className="flex flex-col w-[50rem] max-w-[60rem] md:w-[17rem] md:mx-auto lg:w-[45rem] mr-auto space-y-4"
         >
           <h2 className="mb-10 text-6xl font-primary text-primary-100 md:text-5xl">
             Reservations
@@ -128,7 +128,7 @@ export const BookingForm = () => {
             <div className="mb-3 flex w-1/2 md:w-[17.5rem] sm:w-full  items-center justify-start md:mb-6 md:justify-between">
               <label
                 htmlFor={seatingOptions[0].value}
-                className="mr-16 text-xl font-semibold font-secondary sm:text-lg text-secondary-300 md:mr-0"
+                className="mr-16 text-xl font-semibold sm:text-lg font-secondary text-secondary-300 md:mr-0"
               >
                 {seatingOptions[0].key}
               </label>
@@ -144,7 +144,7 @@ export const BookingForm = () => {
                 // className="w-8 h-8 "
                 className={`seating sm:h-12 sm:w-12 ${
                   formik.touched.seating && formik.errors.seating
-                    ? "error"
+                    ? "outline-red-500"
                     : " "
                 } `}
               />
@@ -192,7 +192,8 @@ export const BookingForm = () => {
                 touched={formik.touched.date}
                 errors={formik.errors.date}
                 value={formik.values.date}
-                LabelClass="mr-0"
+                LabelIconClass="mr-0"
+                labelClass="sm:text-md sm:font-semibold"
                 label="Date"
                 onChange={(e) => {
                   handleDate(e.target.value);
@@ -207,10 +208,11 @@ export const BookingForm = () => {
 
               <InputComponent
                 type="number"
-                className="w-[17.5rem] sm:w-full mt-2 cursor-pointer rounded-[0.19rem]  bg-secondary-300 py-[0.8rem] pl-24 pr-8 font-secondary text-lg sm:text-sm sm:font-semibold font-semibold text-primary-200 outline-8 outline-red-600"
+                className="w-[17.5rem] sm:w-full mt-2 cursor-pointer rounded-[0.19rem] bg-secondary-300 py-[0.8rem] pl-24 pr-8 font-secondary text-lg sm:text-sm sm:font-semibold font-semibold text-primary-200 outline-8 outline-red-600"
                 name="dinners"
-                label="Number of dinners"
-                LabelClass="mr-0"
+                label="Number of Dinners"
+                LabelIconClass="xs:mr-10"
+                labelClass="sm:text-md sm:font-semibold"
                 id="dinners"
                 min={1}
                 max={10}
@@ -224,27 +226,27 @@ export const BookingForm = () => {
             <div className="relative w-1/2 mb-3 sm:w-full ">
               <label
                 htmlFor="occasion"
-                className="block mb-2 font-semibold sm:mb-1 sm:text-sm text-secondary-300"
+                className="block mb-2 font-semibold sm:mb-1 sm:text-md sm:font-semibold text-secondary-300"
               >
                 <MdRestaurant className="absolute z-30 text-2xl font-semibold bottom-4 left-4 text-primary-200" />
                 Occasion
               </label>
               <select
                 id="occasion"
-                className={` group relative flex w-[17.5rem] sm:w-full cursor-pointer rounded-md  bg-secondary-300 px-6 py-4 text-center font-secondary  text-lg sm:text-sm sm:font-semibold font-semibold text-primary-200`}
+                className={`group relative flex w-[17.5rem] sm:w-full cursor-pointer rounded-md  bg-secondary-300 px-6 py-4 text-center font-secondary  text-lg sm:text-sm sm:font-semibold font-semibold text-primary-200`}
                 onChange={formik.handleChange}
                 // value={formik.values.occasion}
                 defaultValue={formik.values.occasion}
               >
-                <option className="  w-[19.5rem] py-16 pl-8">Engagement</option>
-                <option className="mt-5 w-[19.5rem] ">Birthday</option>
-                <option className="mt-5 w-[19.5rem] p-10">Anniversary</option>
+                <option className="w-[19.5rem] py-16 pl-8">Engagement</option>
+                <option className="w-[19.5rem] mt-5">Birthday</option>
+                <option className="w-[19.5rem] mt-5 p-10">Anniversary</option>
               </select>
             </div>
             <div className="relative w-1/2 mb-3 sm:w-full ">
               <label
                 htmlFor="resTime"
-                className="block mb-2 font-semibold sm:mb-1 sm:text-sm text-secondary-300"
+                className="block mb-2 font-semibold sm:mb-1 sm:text-md sm:font-semibold text-secondary-300"
               >
                 <MdAlarm className="absolute z-20 text-2xl font-semibold left-4 top-12 sm:top-10 text-primary-200" />
                 Choose Time

@@ -21,19 +21,19 @@ export const CommonNavbar = ({ className }) => {
         aria-label="Main Navigation"
         className={mergedClass}
       >
-        <Link to="/" className="self-center  lg:-order-first lg:pl-8 sm:pl-0">
+        <Link to="/" className="self-center lg:-order-first lg:pl-8 sm:pl-0">
           <Logo Logo={logoImage} className="xs:w-32" />
         </Link>
         <NavLinkList
           title="Log In"
           to="/log-in"
-          className="  bg-primary-200 text-secondary-300 sm:px-3 sm:py-1 hidden self-center lg:-order-first  lg:inline-block"
+          className="self-center hidden bg-primary-200 text-secondary-300 sm:px-3 sm:py-1 lg:-order-first lg:inline-block"
         />
 
         {/* rendering the Desktop Nav List */}
-        <ul className="max-w-1/2 text-sm space-x-2 lg:space-x-0  flex items-center justify-between font-secondary font-semibold capitalize">
+        <ul className="flex items-center justify-between space-x-2 text-sm font-semibold capitalize max-w-1/2 lg:space-x-0 font-secondary">
           <li>
-            <NavLinkList title="Home" to="/" className="flex lg:hidden mr-4">
+            <NavLinkList title="Home" to="/" className="flex mr-4 lg:hidden">
               Home
             </NavLinkList>
           </li>
@@ -47,7 +47,7 @@ export const CommonNavbar = ({ className }) => {
           <li>
             <NavLinkList
               title="Order Online"
-              to="/order"
+              to="/order-online"
               className="flex lg:hidden"
             />
           </li>
@@ -63,11 +63,11 @@ export const CommonNavbar = ({ className }) => {
           <li>
             <span
               onClick={handleIsToggled}
-              className="px-2 py-2 hidden rounded-sm bg-secondary-300  hover:cursor-pointer lg:flex"
+              className="hidden px-2 py-2 rounded-sm bg-secondary-300 hover:cursor-pointer lg:flex"
             >
               <img
                 src={hamburgerMenu}
-                className="h-4 w-6"
+                className="w-6 h-4"
                 alt="mobile menu list button"
               />
             </span>
@@ -89,21 +89,21 @@ export const CommonNavbar = ({ className }) => {
               : "-translate-x-[100rem] opacity-80"
           } text-md  fixed left-0 top-0 z-40 w-[20rem] h-[calc(100vh-6rem)] overflow-auto   flex-col items-center justify-between pt-8 space-y-14 bg-secondary-300 text-primary-200 shadow-lg  font-secondary font-semibold capitalize  transition-all duration-[120ms] ease-in-out`}
         >
-          <div className="flex justify-between items-center px-6 ">
+          <div className="flex items-center justify-between px-6 ">
             <Link to="/" className="self-center" onClick={handleIsToggled}>
               {/* <img src={Logo} className="h-10 w-36" alt="little lemon Logo" /> */}
               <Logo Logo={logoImage} className="w-40" />
             </Link>
             <button
               onClick={handleIsToggled}
-              // className=" absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-primary-200 text-secondary-300 transition-all hover:cursor-pointer"
-              className="h-7 w-7 text-sm sm:w-6 sm:h-6 sm:text-xs sm:font-thin flex items-center  justify-center rounded-full font-thin bg-primary-200 text-secondary-300 transition-all hover:cursor-pointer"
+              // className="absolute flex items-center justify-center w-10 h-10 transition-all rounded-full right-6 top-6 bg-primary-200 text-secondary-300 hover:cursor-pointer"
+              className="flex items-center justify-center text-sm font-thin transition-all rounded-full h-7 w-7 sm:w-6 sm:h-6 sm:text-xs sm:font-thin bg-primary-200 text-secondary-300 hover:cursor-pointer"
             >
               X
             </button>
           </div>
           {/* rendering the Mobile Nav List */}
-          <div className="space-y-7 sm:space-y-4 pb-8 overflow-auto">
+          <div className="pb-8 overflow-auto space-y-7 sm:space-y-4">
             <li>
               <NavLinkList title="Home" to="/" className="flex pl-7" />
             </li>

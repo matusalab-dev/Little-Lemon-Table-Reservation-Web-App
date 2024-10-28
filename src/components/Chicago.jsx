@@ -3,7 +3,6 @@ import person2 from "../assets/MarioandAdrian-a-compressed.jpg";
 import LazyLoadedImage from "./LazyLoadedImage";
 import { BlockContainer } from "../layouts/CustomContainer";
 import { useState } from "react";
-import useToggle from "../Hooks/useToggle";
 
 export const Chicago = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -32,16 +31,16 @@ export const Chicago = () => {
             Mediterranean at Little Lemon.
           </p>
         </div>
-        <div className="relative z-30 flex flex-col items-start justify-start w-1/2 md:w-full md:items-center h-96">
+        <div className="relative flex flex-col items-start justify-start w-1/2 md:w-full md:items-center h-96">
           <LazyLoadedImage
             src={person2}
-            alt="our chief's on the kitchen preparing a food"
+            alt="our chief's preparing a food on the kitchen"
             className="z-50 absolute top-0 md:-top-10 md:left-0 xs:left-0 h-[clamp(16rem,49.2vh,24rem)] w-[clamp(14rem,28vw,18rem)] xs:w-[clamp(14rem,28vw,18rem)] rounded-sm object-cover"
           />
           <LazyLoadedImage
             src={person1}
-            alt="our chief's on the kitchen preparing a food"
-            className="z-40 absolute right-0 top-10 md:top-36 md:left-24 xs:top-44 xs:left-12 self-start h-[clamp(16rem,49.2vh,24rem)] w-[clamp(14rem,28vw,18rem)] xs:w-[clamp(14rem,28vw,18rem)] rounded-sm object-cover"
+            alt="our chief's preparing a food on the kitchen"
+            className="absolute right-0 top-10 md:top-36 md:left-24 xs:top-44 xs:left-12 self-start h-[clamp(16rem,49.2vh,24rem)] w-[clamp(14rem,28vw,18rem)] xs:w-[clamp(14rem,28vw,18rem)] rounded-sm object-cover"
           />
         </div>
       </BlockContainer>

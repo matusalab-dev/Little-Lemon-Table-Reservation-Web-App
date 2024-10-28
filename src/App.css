@@ -76,6 +76,16 @@ input[type="radio"].seating:checked {
   outline: 1px solid red;
 }
 
+/* Apply red border only to the input field */
+.phone-input-error .PhoneInputInput {
+  border-color: red;
+}
+
+/* Ensure the flag dropdown is not affected */
+.PhoneInputCountry .PhoneInputCountrySelect {
+  border-color: initial; /* Reset flag button's border, if needed */
+}
+
 .bg-overlay {
   background-image: url("../public/Logo.svg");
   background-repeat: no-repeat;

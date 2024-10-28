@@ -55,11 +55,11 @@ export const CustomerSay = () => {
           Testimonials
         </h2>
         {/*testimonials grid  */}
-        <GridLayout>
+        <GridLayout className="gap-y-6">
           {testimonials.map((testimonial, index) => {
             return (
               <div
-                className="col-span-2 lg:col-span-3 md:col-span-6 space-y-4 px-8 py-10 bg-red-200 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-md"
+                className="max-w-sm col-span-2 lg:col-span-3 md:col-span-6 space-y-4 px-8 py-10 bg-red-200 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-md"
                 key={index}
               >
                 <div className="flex content-center space-x-6 xs:space-x-4">

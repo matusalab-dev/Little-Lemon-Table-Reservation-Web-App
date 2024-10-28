@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { MdDeliveryDining } from "react-icons/md";
 
-import { MenuContext } from "../Contexts/MenuContext";
+import { MenuContext } from "../contexts/MenuContext";
 import { GridLayout } from "../layouts/GridLayout";
 
 export const MealCard = ({ menu, children }) => {
@@ -10,9 +10,9 @@ export const MealCard = ({ menu, children }) => {
 
   return (
     <Link
-      to={`/order/${menu.id}/${dishName}`}
+      to={`/order/${id}`}
       key={id}
-      className="col-span-2 overflow-hidden transition-all md:max-w-md lg:col-span-3 md:col-span-6 group hover:shadow-sm rounded-t-xl"
+      className="max-w-sm col-span-2 overflow-hidden transition-all bg-secondary-300 md:max-w-md lg:col-span-3 md:col-span-6 group hover:shadow-sm rounded-t-xl"
     >
       <img
         className="h-[200px] w-[595px] rounded-t-xl object-cover group-hover:scale-105 group-hover:rounded-t-xl transition-all"
@@ -33,7 +33,7 @@ export const MealCard = ({ menu, children }) => {
           {description}
         </p>
         <h3 className="flex items-center text-2xl cursor-pointer font-secondary text-secondary-400">
-          Order a delivery{" "}
+          Order a delivery
           <MdDeliveryDining
             size={40}
             className="ml-8 transition-all ease-out group-hover:translate-x-6"
@@ -45,7 +45,7 @@ export const MealCard = ({ menu, children }) => {
 };
 
 export const Specials = () => {
-  const menus = useContext(MenuContext);
+  const { MEALS } = useContext(MenuContext);
 
   return (
     <main id="menu" className="pt-32 pb-24 mx-auto custom-container md:mb-20">
@@ -60,9 +60,9 @@ export const Specials = () => {
 
       {/* Menu Gallery */}
       <GridLayout>
-        {menus.map((menu) => {
-          return <MealCard menu={menu} />;
-        })}
+        {MEALS.map((menu, index) => (
+          <MealCard key={index} menu={menu} />
+        ))}
       </GridLayout>
     </main>
   );

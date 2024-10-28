@@ -7,7 +7,8 @@ export const InputComponent = ({
   touched,
   errors,
   className,
-  LabelClass,
+  labelClass,
+  labelIconClass,
   id,
   placeholder,
   value,
@@ -21,15 +22,16 @@ export const InputComponent = ({
     className
   );
 
-  const LabelMerged = twMerge("mr-1 text-3xl md:text-2xl ", LabelClass);
+  const LabelIconMerged = twMerge("mr-1 text-3xl md:text-2xl ", labelIconClass);
+  const LabelMerged = twMerge(
+    "flex font-semibold sm:text-sm text-secondary-300",
+    labelClass
+  );
 
   return (
     <div className="mt-6 sm:mt-4">
-      <label
-        htmlFor={id}
-        className="flex font-semibold sm:text-sm text-secondary-300"
-      >
-        <span className={LabelMerged}>{requiredIcon}</span>
+      <label htmlFor={id} className={`${LabelMerged} `}>
+        <span className={LabelIconMerged}>{requiredIcon}</span>
         {label}
       </label>
 
